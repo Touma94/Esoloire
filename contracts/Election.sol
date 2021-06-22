@@ -22,8 +22,8 @@ contract Election is Pausable {
     
     mapping (address => Citoyen) public citoyens;
     Candidat[] public candidats;
-    uint dateDebut;
-    uint dateFin;
+    uint public dateDebut;
+    uint public dateFin;
 
     constructor () {
         owner = msg.sender;
