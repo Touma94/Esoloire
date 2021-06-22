@@ -14,6 +14,7 @@ contract Election is Pausable {
     }
 
     struct Candidat {
+        uint num;
         string nom;
         uint nbrVotes;
     }
@@ -21,7 +22,9 @@ contract Election is Pausable {
     uint public totalVotes;
     
     mapping (address => Citoyen) public citoyens;
-    Candidat[] public candidats;
+    mapping (uint => Candidat) public candidats;
+    uint public nbrCandidats;
+
     uint public dateDebut;
     uint public dateFin;
 
@@ -31,8 +34,8 @@ contract Election is Pausable {
         dateDebut = 1624289019; //21/06/2021 a 17h23 (test)
         dateFin = block.timestamp + 30; //30 sec apres le deploiement (test)
 
-        candidats.push(Candidat('Emmanuel Macron',0));
-        candidats.push(Candidat('Marine Le Pen',0));
+        ajoutCandidat('Emmanuel Macron');
+        ajoutCandidat('Marine Le Pen');
     }
 
     function donnerDroitDeVote(address _personne) whenNotPaused external {
@@ -51,6 +54,11 @@ contract Election is Pausable {
 
         citoyens[msg.sender].vote = _bulletinNum;
         citoyens[msg.sender].aVote = true;
+    }
+
+    function ajoutCandidat(string memory _nom) internal {
+        nbrCandidats++;
+        candidats[nbrCandidats] = Candidat(nbrCandidats, _nom, 0);
     }
     
     function end() whenNotPaused external{
