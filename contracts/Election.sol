@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >0.5.1 <0.8.6;
+pragma solidity ^0.8.0;
 
 import "../node_modules/@openzeppelin/contracts/security/Pausable.sol";
 
@@ -32,7 +32,7 @@ contract Election is Pausable {
         owner = msg.sender;
 
         dateDebut = 1624289019; //21/06/2021 a 17h23 (test)
-        dateFin = block.timestamp + 30; //30 sec apres le deploiement (test)
+        dateFin = block.timestamp + 40; //5 sec apres le deploiement (test)
 
         ajoutCandidat('Emmanuel Macron');
         ajoutCandidat('Marine Le Pen');
