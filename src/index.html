@@ -13,6 +13,9 @@
 
 		<title>E-soloir</title>
 
+		<!-- Google Captcha -->
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 		<!-- Vue -->
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
@@ -36,13 +39,19 @@
 				<nav class="navbar">
 					<ul class="menu">
 						<li class="menu-item">
-							<router-link to="/">Le vote en ligne</router-link>
+							<router-link to="/" exact>Le vote en ligne</router-link>
 						</li>
 						<li class="menu-item">
-							<router-link to="/">Comment ça marche?</router-link>
+							<router-link to="/#comment-ca-marche"
+								>Comment ça marche?</router-link
+							>
 						</li>
-						<li class="menu-item"><router-link to="/">Aide</router-link></li>
-						<li class="menu-item"><router-link to="/">Voter</router-link></li>
+						<li class="menu-item">
+							<router-link to="/#aide">Aide</router-link>
+						</li>
+						<li class="menu-item">
+							<router-link to="/vote">Voter</router-link>
+						</li>
 						<li class="menu-item">
 							<router-link to="/connexion">Se connecter</router-link>
 						</li>

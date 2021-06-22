@@ -57,7 +57,7 @@ ul li {
 
 .menu a:hover {
 	color: #034ea2;
-	border-bottom: 3px solid #034ea2;
+	border-bottom: 4px solid #034ea2;
 }
 
 footer {
@@ -89,4 +89,9 @@ footer {
 
 .footer-container li:hover {
 	text-decoration: underline;
+}
+
+.active {
+	color: #034ea2 !important;
+	border-bottom: 4px solid #034ea2;
 }

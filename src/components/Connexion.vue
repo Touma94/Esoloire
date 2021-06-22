@@ -33,6 +33,8 @@
 								required
                             />
                              </div>
+                            <div class="g-recaptcha center" data-sitekey="6LfhPU0bAAAAABIL4nMlTL5KSXbN41dYbRvsTHlB"></div>
+
                             <button
                                 type="submit"
                                 class="fadeIn fourth"
@@ -41,7 +43,7 @@
                         </div>
 
                         <div id="formFooter" >
-                                        &copy;E-soloir
+                            &copy;E-soloir
                         </div>
                 </form>
             </div>
@@ -57,6 +59,7 @@ module.exports = {
 <style scoped>
 
 .container{
+    margin-top: 5px;
     padding: 20px;
     background: #005C97;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #363795, #005C97);  /* Chrome 10-25, Safari 5.1-6 */
@@ -102,6 +105,13 @@ label{
 }
 span{
     color: red;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 10px 0px;
 }
 
 /* STRUCTURE */
