@@ -23,7 +23,7 @@ module.exports = {
 }
 </script>
 
-<style>
+<style scoped>
 .container{
     background-color: #f7f7f7;
     height: 20vh;

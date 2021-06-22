@@ -1,7 +1,7 @@
 
 const Home = window.httpVueLoader('../components/Home.vue')
-const Inscription = httpVueLoader('../components/Inscription.vue')
-const Connexion = httpVueLoader('../components/Connexion.vue')
+const Inscription = window.httpVueLoader('../components/Inscription.vue')
+const Connexion = window.httpVueLoader('../components/Connexion.vue')
 
 
 const routes = [
