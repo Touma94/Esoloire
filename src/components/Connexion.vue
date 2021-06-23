@@ -59,14 +59,11 @@ module.exports = {
 <style scoped>
 
 .container{
-    margin-top: 5px;
+    margin-top: 15px;
     padding: 20px;
     background: #005C97;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #363795, #005C97);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #363795, #005C97); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
 }
 
 .header-title{
@@ -90,18 +87,16 @@ module.exports = {
 }
 
 label{
-    font-size: 12px;
+    font-size: 15px;
     color: #0B6BA8;
-  
+    font-weight: 600;
    
 }
 
-.label-email{
-    padding-right: 40px;
-}
+
 
 .label-password{
-    padding-right: 260px;
+    padding-right: 280px;
 }
 span{
     color: red;
@@ -117,7 +112,8 @@ span{
 /* STRUCTURE */
 
 .form-logo{
-    width: 100px;
+    width: 150px;
+    margin: 10px;
 }
 
 .wrapper {
@@ -137,7 +133,7 @@ span{
     background: #fff;
 	padding: 35px;
 	width: 90%;
-	max-width: 450px;
+	max-width: 500px;
 	position: relative;
 	padding: 0px;
 	-webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
