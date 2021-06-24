@@ -18,10 +18,10 @@
        </div>
        <h2>Comment ça marche?</h2>
     <div class="text-container">
-        <p style="display: flex;justify-content: flex-end;">1<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
-        <p style="display: flex;justify-content: flex-start;">2<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
-        <p style="display: flex;justify-content: flex-end;">3<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
-        <p style="display: flex;justify-content: flex-start;">4<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
+        <p style="align-self: flex-end;">1<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
+        <p>2<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
+        <p style="align-self: flex-end;">3<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
+        <p>4<br>Lors de ma démarche en ligne, je clique sur le lien du mail.</p>
     </div>
     </div>
    
