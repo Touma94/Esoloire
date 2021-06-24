@@ -21,19 +21,25 @@
 		<script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	</head>
 
+		<!-- Chart Js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+		<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+	</head>
 	<body>
 		<div id="app">
 			<header>
 				<div class="header-logo">
 					<div class="logo-container">
-						<img
-							src="./images/marianne-sig.svg"
-							alt="marianne logo"
-							class="marianne"
-						/>
-						<img src="./images/logo.png" alt="logo" class="logo" />
+						<router-link to="/" class="nostyle">
+							<img
+								src="./images/marianne-sig.svg"
+								alt="marianne logo"
+								class="marianne"
+						/></router-link>
+						<router-link to="/" class="nostyle">
+							<img src="./images/logo.png" alt="logo" class="logo" />
+						</router-link>
 					</div>
 				</div>
 				<nav class="navbar">

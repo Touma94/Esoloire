@@ -40,7 +40,7 @@
                     <h2>Veuillez charger votre carte d'identité et votre carte électorale :</h2>
                     <p><span>*</span> Afin de garantir la validité de votre identité vous allez devoir nous envoyer une photo selfie avec votre carte d'identité.</p>
                 <label for="file" class="label-pj"><span>*</span> Pièces jointes(.jpeg,.png,.pdf)</label>
-                <input type="file" name="file" id="file">
+                <input type="file" name="file" id="file" >
 
                 <h2>Vos fichiers chargés :</h2>
 
@@ -126,7 +126,7 @@ span{
     display: flex;
     flex-flow: column wrap;
     width: 500px;
-    margin-left: 200px;
+    margin-left: 250px;
     align-items: center;
 
 }
@@ -180,7 +180,13 @@ input[type="password"]:placeholder {
 	color: #cccccc;
 }
 
+input[type="file"]{
+    width: 100%;
+}
+
+
 input[type="file"]::-webkit-file-upload-button{
+    
     background-color: #0B6BA8;
 	border: none;
 	color: white;

@@ -95,3 +95,8 @@ footer {
 	color: #034ea2 !important;
 	border-bottom: 4px solid #034ea2;
 }
+
+.nostyle {
+	text-decoration: none;
+	border-bottom: none;
+}
