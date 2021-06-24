@@ -2,11 +2,11 @@ App = {
   web3Provider: null,
   contracts: {},
 
-  init: async function() {
+  init: async function () {
     return await App.initWeb3();
   },
 
-  initWeb3: async function() {
+  initWeb3: async function () {
     /*
      * Replace me...
      */
@@ -14,7 +14,7 @@ App = {
     return App.initContract();
   },
 
-  initContract: function() {
+  initContract: function () {
     /*
      * Replace me...
      */
@@ -22,15 +22,15 @@ App = {
     return App.bindEvents();
   },
 
-  bindEvents: function() {
+  bindEvents: function () {
     // $(document).on('click', '.btn-adopt', App.handleAdopt);
   },
 
 
 };
 
-$(function() {
-  $(window).load(function() {
-    App.init();
-  });
-});
+// $(function() {
+//   $(window).load(function() {
+//     App.init();
+//   });
+// });

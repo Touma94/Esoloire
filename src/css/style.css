@@ -1,0 +1,102 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+}
+
+a,
+a::after,
+a::before,
+a:visited {
+	text-decoration: none;
+	color: #3e4553;
+}
+
+ul li {
+	list-style: none;
+}
+
+.header-logo {
+	margin: 20px;
+}
+
+.logo-container {
+	padding: 0 230px;
+}
+
+.marianne {
+	width: 100px;
+}
+
+.logo {
+	margin-left: 110px;
+	width: 180px;
+}
+
+.navbar {
+	padding: 16px 245px;
+	border-top: 1px solid #ebf2f9;
+	border-bottom: 1px solid #ebf2f9;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-between;
+	font-weight: bold;
+	color: #3e4553;
+
+	cursor: pointer;
+	position: relative;
+}
+
+.menu a {
+	padding-bottom: 1em;
+	transition: color 0.2s ease-out, border-bottom 0.2s ease-out;
+}
+
+.menu a:hover {
+	color: #034ea2;
+	border-bottom: 4px solid #034ea2;
+}
+
+footer {
+	border-top: 4px solid #034ea2;
+}
+
+.marianne-footer {
+	width: 150px;
+}
+
+.logo-footer {
+	width: 180px;
+}
+
+.footer-logo-container {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: space-between;
+}
+
+.footer-container {
+	padding: 30px 250px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 2.5;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.footer-container li:hover {
+	text-decoration: underline;
+}
+
+.active {
+	color: #034ea2 !important;
+	border-bottom: 4px solid #034ea2;
+}
+
+.nostyle {
+	text-decoration: none;
+	border-bottom: none;
+}

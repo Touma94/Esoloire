@@ -14,5 +14,9 @@
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "chart.js": "^3.3.2",
+    "vue-chartjs": "^3.5.1"
   }
 }
