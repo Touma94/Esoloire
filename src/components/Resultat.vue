@@ -7,11 +7,12 @@
             
     <h1 class="header-title">Résultat en cours</h1>
 
-    <div class="chart">
+    <div class="chart" id="chart">
+        <my-bar-chart ></my-bar-chart>
         
     </div>
 
-    <h1 class="header-title">Candidats</h1>
+    <h1 class="header-title-2">Candidats</h1>
     
     <div class="candidats">
       <div class="cards">
@@ -25,16 +26,14 @@
 </template>
 
 <script>
-const BarChart = httpVueLoader('../components/BarChart.vue');
 const Card = httpVueLoader('../components/Card.vue');
 
 module.exports= {
     name:'Resultat',
     components:{
-      BarChart,
-      Card
+      Card: Card
     },
-    data(){
+    data(){ 
       return{
         candidats:[{
           id:0,
@@ -76,19 +75,31 @@ module.exports= {
         },
         
         ],
+
       }
-}
+  }
 }
 </script>
 
 <style scoped>
 .header-title{
-  width: 450px;
+    width: 450px;
     margin-left: 235px;
     text-transform: uppercase;
     letter-spacing: .35rem;
     line-height: 2.5;
-    display: block;
+    
+    color: #0B6BA8;
+    border-bottom: 4px solid #0B6BA8;
+    
+}
+.header-title-2{
+    width: 250px;
+    margin-left: 235px;
+    text-transform: uppercase;
+    letter-spacing: .35rem;
+    line-height: 2.5;
+    
     color: #0B6BA8;
     border-bottom: 4px solid #0B6BA8;
     
@@ -106,13 +117,17 @@ module.exports= {
 }
 
 .cards{
-  padding: 100px 230px;
+  padding: 50px 230px;
   display: flex;
   justify-content: space-evenly;
   flex-flow: row wrap;
 }
 .card-spacing{
   margin: 50px;
+}
+
+.chart{
+  padding: 100px 230px;
 }
 
 </style>

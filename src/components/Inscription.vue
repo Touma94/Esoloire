@@ -238,6 +238,7 @@ input[type="file"]::-webkit-file-upload-button{
 }
 
 .captcha{
+    margin-top: 100px;
     display: flex;
     flex-flow: column;
     justify-content: center;
