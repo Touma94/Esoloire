@@ -22,15 +22,15 @@
                     </div>
                     <div>
                         <label for="email"><span>*</span> Adresse électronique (exmple: nom@exemple.fr)</label>
-                        <input type="email" name="email" id="email" required>
+                        <input type="email" name="email" id="email" autocomplete="email" required>
                     </div>
                     <div>
                         <label for="nom"><span>*</span> Mot de passe <br>(8 caractères,1 Majuscule, 1 chiffre et 1 caractère spécial) </label>
-                        <input type="password" name="password" id="password" required>
+                        <input type="password" name="password" id="password" autocomplete="new-password" required>
                     </div>
                     <div>
                         <label for="confirmPassword"><span>*</span> Confirmer votre Mot de passe </label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" required>
+                        <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="new-password" required>
                     </div>
                 
                 </form>
@@ -40,15 +40,16 @@
                     <h2>Veuillez charger votre carte d'identité et votre carte électorale :</h2>
                     <p><span>*</span> Afin de garantir la validité de votre identité vous allez devoir nous envoyer une photo selfie avec votre carte d'identité.</p>
                 <label for="file" class="label-pj"><span>*</span> Pièces jointes(.jpeg,.png,.pdf)</label>
-                <input type="file" name="file" id="file" >
+                <input type="file" name="file" id="file" ref="myFiles" @change="previewFiles" multiple accept=".jpg, .jpeg, .png , .pdf"  >
 
                 <h2>Vos fichiers chargés :</h2>
 
-                <ul class="list-file">
-                    <li class="file-item">Carte d'identité.pdf <img src="../images/oeil.png" alt="" class="oeil">&Cross;</li>
-                    <li class="file-item">Carte électorale.pdf <img src="../images/oeil.png" alt="" class="oeil">&Cross;</li>
-                    <li class="file-item">Selfie.png <img src="../images/oeil.png" alt="" class="oeil">&Cross;</li>
-                </ul>
+                <div class="list-file" v-if="showList">
+                    <ul v-for="file in files" :file="file" :key="file.id"  >
+                        <li class="file-item">{{file.name}} <img src="../images/oeil.png" alt="" class="oeil" @click="readFile(file)"> <span class="cross" @click="deleteFile(file)" >&Cross;</span></li>
+                    </ul>
+                    <img id="output">
+                </div>
                 
             </div>
         </div>
@@ -71,7 +72,58 @@ Veuillez cocher la case afin de prouver que vous n’êtes pas un robot. Si vous
 
 <script>
 module.exports = {
-    name:'Inscription'
+    name:'Inscription',
+    data() {
+        return {
+            files: [],
+            showList: false,
+        }
+    },
+    methods: {
+        previewFiles(event) {
+            console.log(event.target.files);
+            this.files = event.target.files;
+            this.showList = true;
+        },
+        readFile(file){
+            console.log(file)
+            const output = document.getElementById('output');
+            output.src = '';
+            const reader = new FileReader();
+            reader.addEventListener('load',(e) => {
+                output.src = e.target.result;
+            })
+            reader.readAsDataURL(file);
+        },
+        deleteFile(file){
+         
+            console.log(this.files)
+            console.log(Object.values(this.files)[0].name)
+
+            console.log("length " + this.files.length)
+
+            let fileArray = [];
+            for(var i = 0; i < this.files.length; i++){
+                fileArray.push(Object.values(this.files)[i].name);
+            }
+
+            console.log(fileArray);
+
+            const index = fileArray.findIndex(fileName => fileName === file.name);
+            console.log(index)
+
+            const dt = new DataTransfer()
+            const input = document.getElementById('file')
+            const { files } = input
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]
+                if (index !== i) dt.items.add(file) // here you exclude the file. thus removing it.
+                input.files = dt.files
+                this.files = dt.files
+            }            
+        }
+
+    }
 }
 </script>
 
@@ -234,16 +286,28 @@ input[type="file"]::-webkit-file-upload-button{
 .oeil{
     width: 20px;
     display: inline-block;
+    cursor: pointer;
    
 }
 
 .captcha{
+    margin-top: 100px;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
 }
 
+#output{
+    width: 400px;
+    object-fit: cover;
+}
+
+.cross{
+    font-size: 16px;
+    cursor:pointer;
+    display: block;
+}
 
 button {
 	background-color: #0B6BA8;
