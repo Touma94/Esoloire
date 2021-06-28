@@ -1,5 +1,5 @@
 {
-  "name": "pet-shop",
+  "name": "e-soloir",
   "version": "1.0.0",
   "description": "",
   "main": "truffle.js",
@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node truffle.js",
     "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +17,8 @@
     "lite-server": "^2.3.0"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.1.0"
+    "@openzeppelin/contracts": "^4.1.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
   }
 }
