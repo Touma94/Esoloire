@@ -18,6 +18,9 @@
                 </div>
             </div>
        </div>
+       <div class="texte d'explications">
+           <p>test</p>
+       </div>
     </div>
    
 
