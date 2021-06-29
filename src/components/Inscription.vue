@@ -7,7 +7,7 @@
        
             <div class="form-container">
                 <h3 class="heading-3">Les champs marqués d'un <span>*</span> sont obligatoires</h3>
-                <form action="">
+                <form @submit.prevent="createUser()">
                     <div>
                         <label for="nom"><span>*</span> Nom </label>
                         <input type="text" name="nom" id="nom">
@@ -16,23 +16,33 @@
                         <label for="prenom"><span>*</span> Prénom </label>
                         <input type="text" name="prenom" id="prenom">
                     </div>
-                    <div>
-                        <label for="numTel"><span>*</span> Numéro de téléphone </label>
-                        <input type="text" name="numTel" id="numTel">
-                    </div>
+                  
                     <div>
                         <label for="email"><span>*</span> Adresse électronique (exmple: nom@exemple.fr)</label>
-                        <input type="email" name="email" id="email" autocomplete="email" required>
+                        <input type="email" name="email" id="email" v-model="email" autocomplete="email" required>
                     </div>
                     <div>
                         <label for="nom"><span>*</span> Mot de passe <br>(8 caractères,1 Majuscule, 1 chiffre et 1 caractère spécial) </label>
-                        <input type="password" name="password" id="password" autocomplete="new-password" required>
+                        <input type="password" name="password" id="password" v-model="password" autocomplete="new-password" required>
                     </div>
                     <div>
                         <label for="confirmPassword"><span>*</span> Confirmer votre Mot de passe </label>
                         <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="new-password" required>
                     </div>
-                
+
+                    <div class="captcha">
+                        <div class="block">
+                            <h3>Etes-vous un robot?</h3>
+                            <p>
+                            Veuillez cocher la case afin de prouver que vous n’êtes pas un robot. Si vous ne la voyez pas, vous pouvez nous écrire afin d'obtenir de l’aide.</p>
+                        </div>
+            
+                        <div class="g-recaptcha center" data-sitekey="6LfhPU0bAAAAABIL4nMlTL5KSXbN41dYbRvsTHlB"></div>
+
+                            <button type="submit">S'inscrire</button> 
+                    </div>
+
+                   
                 </form>
             </div>
 
@@ -40,7 +50,7 @@
                     <h2>Veuillez charger votre carte d'identité et votre carte électorale :</h2>
                     <p><span>*</span> Afin de garantir la validité de votre identité vous allez devoir nous envoyer une photo selfie avec votre carte d'identité.</p>
                 <label for="file" class="label-pj"><span>*</span> Pièces jointes(.jpeg,.png,.pdf)</label>
-                <input type="file" name="file" id="file" ref="myFiles" @change="previewFiles" multiple accept=".jpg, .jpeg, .png , .pdf"  >
+                <input type="file" name="file" id="file" ref="myFiles" @change="previewFiles" multiple accept=".jpg, .jpeg, .png , .pdf" required  >
 
                 <h2>Vos fichiers chargés :</h2>
 
@@ -54,18 +64,7 @@
             </div>
         </div>
 
-        <div class="captcha">
-            <div class="block">
-                <h3>Etes-vous un robot?</h3>
-                <p>
-Veuillez cocher la case afin de prouver que vous n’êtes pas un robot. Si vous ne la voyez pas, vous pouvez nous écrire afin d'obtenir de l’aide.</p>
-            </div>
-            
-            <div class="g-recaptcha center" data-sitekey="6LfhPU0bAAAAABIL4nMlTL5KSXbN41dYbRvsTHlB"></div>
-
-            <button type="submit">S'inscrire</button>
-        </div>
-
+      
     </div>
     
 </template>
@@ -77,6 +76,8 @@ module.exports = {
         return {
             files: [],
             showList: false,
+            email:"",
+            password:"",
         }
     },
     methods: {
@@ -121,7 +122,17 @@ module.exports = {
                 input.files = dt.files
                 this.files = dt.files
             }            
+        },
+        async createUser(){
+             const res = await axios.post("https://e-soloir-backend.herokuapp.com/signup",{
+                headers: 'Content-Type:multipart/form-data',
+                email: this.email,
+                password: this.password
+            });
+            console.log(res.data);
+            // this.$router.push("/")
         }
+
 
     }
 }
@@ -291,7 +302,7 @@ input[type="file"]::-webkit-file-upload-button{
 }
 
 .captcha{
-    margin-top: 100px;
+    margin-top: 50px;
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -329,6 +340,7 @@ button {
 	-ms-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 button:hover {

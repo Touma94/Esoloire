@@ -117,7 +117,7 @@ module.exports= {
 }
 
 .cards{
-  padding: 50px 230px;
+  padding: 50px 100px;
   display: flex;
   justify-content: space-evenly;
   flex-flow: row wrap;
