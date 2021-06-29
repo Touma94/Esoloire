@@ -36,25 +36,34 @@ App = {
       App.contracts.Election.setProvider(App.web3Provider);
 
       // App.listenForEvents();
-      return App.getInfos();
+      App.getInfos();
     });
   },
 
-  getInfos: function () {
-    // $(document).on('click', '.btn-adopt', App.handleAdopt);
-      console.log("your acc : ", App.account);
+  getInfos: async function () {
       let instance = await App.contracts.Election.deployed();
       let cpt = await instance.nbrCandidats();
-      let cptn = cpt.toNumber()
-      console.log(cptn);
       let candidats = [];
-      for (let i=0, i < cpt, i++){
-        let cd = await app.candidats(1);
-        candidats[i] = cd[1].toNumber();
+      for (let i=1; i <= cpt; i++){
+        let cd = await instance.candidats(i);
+        candidats[i-1] = cd[1];
       }
-      console.log(candidats) 
+      // App.getResultats();
+      return candidats;
   },
 
+  getResultats: async function () {
+    let instance = await App.contracts.Election.deployed();
+    let total = await instance.totalVotes();
+    let cpt = await instance.nbrCandidats();
+    let resultat = {nom:['total'], nbrVotes:[total.toNumber()]};
+    for (let i=1; i <= cpt; i++){
+      let cd = await instance.candidats(i);
+      resultat.nom[i] = cd[1]
+      resultat.nbrVotes[i] = cd[2].toNumber();
+    }
+    return resultat;
+  },
 
 };
 
