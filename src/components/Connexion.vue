@@ -62,15 +62,13 @@ module.exports = {
 	},
 	methods:{
 		async connexion(){
-		
-		try{
-			const res = axios.post("http:localhost:5000/login",{
+	const res = await axios.post("http://localhost:5000/login",{
 				email: this.email,
 				password: this.password
-			}).then(res => res.data)
-		}catch(err){
-			console.log(err)
-		}
+	});
+	console.log(res.data);
+	this.$router.push("/voter");
+		
 		
 		}
 	}
