@@ -66,8 +66,10 @@ module.exports = {
 				email: this.email,
 				password: this.password
 	});
-	console.log(res.data);
-	this.$router.push("/voter");
+	const user = res.data;
+	if(user.isadmin) this.$router.push("/admin");
+	else if(user.isvalidated == 'true') this.$router.push("/voter");
+	else console.log("user not validated yet");
 		
 		
 		}
