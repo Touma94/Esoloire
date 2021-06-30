@@ -53,7 +53,28 @@
 
 <script>
 module.exports = {
-    name:'Connexion'
+    name:'Connexion',
+	data(){
+		return{
+			email: "",
+			password:"",
+		}
+	},
+	methods:{
+		async connexion(){
+		
+		try{
+			const res = axios.post("http:localhost:5000/login",{
+				email: this.email,
+				password: this.password
+			}).then(res => res.data)
+		}catch(err){
+			console.log(err)
+		}
+		
+		}
+	}
+
 }
 </script>
 <style scoped>
