@@ -2,28 +2,34 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0xBED9646559c43896edD205Ab7Ee85201e45d038a',
+  web3: null,
 
   init: async function () {
     return await App.initWeb3();
   },
 
   initWeb3: async function () {
-    if (window.ethereum) {
-      App.web3Provider = window.ethereum;
-      try {
-        await window.ethereum.enable();
-      } catch (error) {
-        console.error("User denied account access")
-      }
+    const { RelayProvider } = require('@opengsn/provider')
+    const config = { 
+      paymasterAddress
     }
-    else if (window.web3) {
-      App.web3Provider = window.web3.currentProvider;
-    }
-    else {
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+    App.web3Provider = await RelayProvider.newProvider({ provider: new Web3.providers.HttpProvider('http://localhost:7545'), config }).init()
+    // if (window.ethereum) {
+    //   App.web3Provider = window.ethereum;
+    //   try {
+    //     await window.ethereum.enable();
+    //   } catch (error) {
+    //     console.error("User denied account access")
+    //   }
+    // }
+    // else if (window.web3) {
+    //   App.web3Provider = window.web3.currentProvider;
+    // }
+    // else {
+      // App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       console.log('web3 initialise')
-    }
-    web3 = new Web3(App.web3Provider);
+    // }
+    App.web3 = new Web3(App.web3Provider);
 
     return App.initContract();
   },
