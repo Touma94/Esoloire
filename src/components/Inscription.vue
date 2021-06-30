@@ -7,14 +7,19 @@
        
             <div class="form-container">
                 <h3 class="heading-3">Les champs marqués d'un <span>*</span> sont obligatoires</h3>
-                <form @submit.prevent="createUser()">
+                <form @submit.prevent="createUser()" enctype="multipart/form-data">
                     <div>
-                        <label for="nom"><span>*</span> Nom </label>
-                        <input type="text" name="nom" id="nom">
+                        <label for="last_name"><span>*</span> Nom </label>
+                        <input type="text" name="last_name" id="last_name" v-model="last_name">
                     </div>
                     <div>
-                        <label for="prenom"><span>*</span> Prénom </label>
-                        <input type="text" name="prenom" id="prenom">
+                        <label for="first_name"><span>*</span> Prénom </label>
+                        <input type="text" name="first_name" id="first_name" v-model="first_name">
+                    
+                    </div>
+                    <div>
+                        <label for="phone"><span>*</span> Numéro de téléphone </label>
+                        <input type="text" name="phone" id="phone" v-model="phone">
                     </div>
                   
                     <div>
@@ -30,38 +35,42 @@
                         <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="new-password" required>
                     </div>
 
+                     <div class="upload-container">
+                            <h2>Veuillez charger votre carte d'identité et votre carte électorale :</h2>
+                            <p><span>*</span> Afin de garantir la validité de votre identité vous allez devoir nous envoyer une photo selfie avec votre carte d'identité.</p>
+                        
+                        <label for="file" class="label-pj"><span>*</span> Pièces jointes(.jpeg,.png,.pdf)</label>
+                        <input type="file" name="file" id="file" ref="myFiles" @change="previewFiles" multiple accept=".jpg, .jpeg, .png , .pdf" required  >
+
+                        <h2>Vos fichiers chargés :</h2>
+
+                        <div class="list-file" v-if="showList">
+                            <ul v-for="file in files" :file="file" :key="file.id"  >
+                                <li class="file-item">{{file.name}} <img src="../images/oeil.png" alt="" class="oeil" @click="readFile(file)"> <span class="cross" @click="deleteFile(file)" >&Cross;</span></li>
+                            </ul>
+                            <img id="output">
+                        </div>
+                        
+                    </div>
+
                     <div class="captcha">
                         <div class="block">
                             <h3>Etes-vous un robot?</h3>
                             <p>
                             Veuillez cocher la case afin de prouver que vous n’êtes pas un robot. Si vous ne la voyez pas, vous pouvez nous écrire afin d'obtenir de l’aide.</p>
                         </div>
-            
+
                         <div class="g-recaptcha center" data-sitekey="6LfhPU0bAAAAABIL4nMlTL5KSXbN41dYbRvsTHlB"></div>
 
                             <button type="submit">S'inscrire</button> 
-                    </div>
-
+                        </div>
+                    
+                   
                    
                 </form>
             </div>
 
-            <div class="upload-container">
-                    <h2>Veuillez charger votre carte d'identité et votre carte électorale :</h2>
-                    <p><span>*</span> Afin de garantir la validité de votre identité vous allez devoir nous envoyer une photo selfie avec votre carte d'identité.</p>
-                <label for="file" class="label-pj"><span>*</span> Pièces jointes(.jpeg,.png,.pdf)</label>
-                <input type="file" name="file" id="file" ref="myFiles" @change="previewFiles" multiple accept=".jpg, .jpeg, .png , .pdf" required  >
-
-                <h2>Vos fichiers chargés :</h2>
-
-                <div class="list-file" v-if="showList">
-                    <ul v-for="file in files" :file="file" :key="file.id"  >
-                        <li class="file-item">{{file.name}} <img src="../images/oeil.png" alt="" class="oeil" @click="readFile(file)"> <span class="cross" @click="deleteFile(file)" >&Cross;</span></li>
-                    </ul>
-                    <img id="output">
-                </div>
-                
-            </div>
+            
         </div>
 
       
@@ -76,6 +85,9 @@ module.exports = {
         return {
             files: [],
             showList: false,
+            last_name:"",
+            first_name:"",
+            phone:"",
             email:"",
             password:"",
         }
@@ -126,8 +138,12 @@ module.exports = {
         async createUser(){
              const res = await axios.post("https://e-soloir-backend.herokuapp.com/signup",{
                 headers: 'Content-Type:multipart/form-data',
+                last_name: this.nom,
+                first_name:this.prenom,
+                phone: this.numTel,
                 email: this.email,
-                password: this.password
+                password: this.password,
+                files: this.files
             });
             console.log(res.data);
             // this.$router.push("/")
