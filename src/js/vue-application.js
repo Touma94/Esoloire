@@ -49,15 +49,13 @@ var app = new Vue({
     async connexion(user) {
       const res = await axios.post("http://localhost:5000/login", user);
       user.data = res.data;
-      if (user.isadmin) this.$router.push("/admin");
-      else if (user.isvalidated == "true") this.$router.push("/voter");
-      else console.log("user not validated yet");
 
       if (res.data !== undefined) {
         this.user = res.data;
         this.isConnected = true;
-        this.$router.push("/voter");
-      }
+        if (this.user.isadmin) this.$router.push("/admin");
+        else if (this.user.isvalidated == "true") this.$router.push("/voter");
+      } else console.log("user not validated yet");
     },
 
     async logout() {
