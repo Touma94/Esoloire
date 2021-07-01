@@ -8,13 +8,26 @@
       <h5>Fichiers envoyés :</h5>
       <ul class="list-file">
         <li class="file-item">
-          FILENAME <img src="../images/oeil.png" alt="" class="oeil" />
+          {{ user.id_card }}
+          <img
+            id="id_card"
+            :src="getImgUrl_id_card(user)"
+            alt=""
+            class="oeil"
+          />
         </li>
         <li class="file-item">
-          FILENAME <img src="../images/oeil.png" alt="" class="oeil" />
+          {{ user.selfie }}
+          <img id="selfie" :src="getImgUrl_selfie(user)" alt="" class="oeil" />
         </li>
         <li class="file-item">
-          FILENAME <img src="../images/oeil.png" alt="" class="oeil" />
+          {{ user.electoral_card }}
+          <img
+            id="electoral_card"
+            :src="getImg_electoral_card(user)"
+            alt=""
+            class="oeil"
+          />
         </li>
       </ul>
 
@@ -63,6 +76,15 @@ module.exports = {
           const index = this.users.findIndex((user) => user.id === id_user);
           this.users.splice(index, 1);
         });
+    },
+    getImgUrl_id_card(user) {
+      return "http://localhost:5000/" + user.id_card;
+    },
+    getImgUrl_selfie(user) {
+      return "http://localhost:5000/" + user.selfie;
+    },
+    getImg_electoral_card(user) {
+      return "http://localhost:5000/" + user.electoral_card;
     },
   },
 };
