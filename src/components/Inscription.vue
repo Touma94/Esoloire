@@ -4,6 +4,12 @@
 
     <div class="layout">
       <div class="form-container">
+        <div class="alert success" id="alert-success">
+          <span class="closebtn">×</span>
+          <strong>Succès!</strong> Votre compte est soumis à la vérification des
+          données afin que vous participez aux prochaines élections. Surveillez
+          vos mails!
+        </div>
         <h3 class="heading-3">
           Les champs marqués d'un <span>*</span> sont obligatoires
         </h3>
@@ -212,7 +218,33 @@ module.exports = {
         method: "post",
         body: formData,
       })
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res);
+          var close = document.getElementsByClassName("closebtn");
+
+          // Get the parent of <span class="closebtn"> (<div class="alert">)
+          var div = close[0].parentElement;
+
+          // Set the opacity of div to 1 (transparent)
+          div.style.opacity = "1";
+
+          // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+          div.style.display = "block";
+          location.href = "/inscription#alert-success";
+
+          close[0].onclick = function () {
+            // Get the parent of <span class="closebtn"> (<div class="alert">)
+            var div = this.parentElement;
+
+            // Set the opacity of div to 0 (transparent)
+            div.style.opacity = "0";
+
+            // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+            setTimeout(function () {
+              div.style.display = "none";
+            }, 600);
+          };
+        })
         .catch((err) => ("Error occured", err));
 
       // this.$router.push("/")
@@ -421,5 +453,48 @@ button:active {
   -o-transform: scale(0.95);
   -ms-transform: scale(0.95);
   transform: scale(0.95);
+}
+
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 0.83;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+  display: none;
+}
+
+.alert.success {
+  background-color: #04aa6d;
+}
+
+.closebtn {
+  padding-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  line-height: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
 }
 </style>
