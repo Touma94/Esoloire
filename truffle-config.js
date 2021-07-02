@@ -16,6 +16,12 @@ module.exports = {
       },
       network_id: '3',
     },
+    rinkerby: {
+      provider: function() {
+        return new HDWalletProvider(process.env.MNEMONIC, "https://rinkeby.infura.io/v3/e159e978c0b644adb6bf801eff4c8f71");
+      },
+      network_id: '4',
+    },
   },
   compilers: {
     solc: {

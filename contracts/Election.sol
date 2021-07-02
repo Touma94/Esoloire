@@ -7,7 +7,7 @@ import "@opengsn/contracts/src/BaseRelayRecipient.sol";
 
 contract Election is BaseRelayRecipient{
 
-    string public override versionRecipient = "2.2.3";
+    string public override versionRecipient = "2.2.0";
     address public owner;
 
     struct Citoyen {

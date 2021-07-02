@@ -46,7 +46,7 @@ contract Paymaster is BasePaymaster {
 	}
 
   function versionPaymaster() external virtual view override returns (string memory) {
-    return "2.2.3";
+    return "2.2.0";
   }
 
 }

@@ -10,8 +10,8 @@
     "start": "nodemon main.js",
     "dev": "lite-server",
     "test": "truffle test",
-    "migrate": "truffle migrate --network ropsten --reset",
-    "console": "truffle console --network ropsten"
+    "migrate": "truffle migrate --network rinkerby --reset",
+    "console": "truffle console --network rinkerby"
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +21,8 @@
     "lite-server": "^2.3.0"
   },
   "dependencies": {
-    "@opengsn/contracts": "2.2.2",
-    "@opengsn/provider": "^2.2.3",
+    "@opengsn/contracts": "^2.2.2",
+    "@opengsn/provider": "^2.2.2",
     "@openzeppelin/contracts": "^4.1.0",
     "@openzeppelin/gsn-helpers": "^0.2.4",
     "dotenv": "^10.0.0",
