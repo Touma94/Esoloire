@@ -245,8 +245,17 @@ module.exports = {
         method: "post",
         body: formData,
       })
-        .then((res) => {
-          console.log(res);
+        .then(async (res) => {
+          const data = await res.json();
+
+          // check for error response
+          if (!res.ok) {
+            // get error message from body or default to response statusText
+            const error = (data && data.message) || response.statusText;
+            alert(error);
+            return Promise.reject(error);
+          }
+
           var close = document.getElementsByClassName("closebtn");
 
           // Get the parent of <span class="closebtn"> (<div class="alert">)
@@ -272,7 +281,10 @@ module.exports = {
             }, 600);
           };
         })
-        .catch((err) => ("Error occured", err));
+        .catch((error) => {
+          this.errorMessage = error;
+          console.error("There was an error!", error);
+        });
 
        
       // this.$router.push("/")
