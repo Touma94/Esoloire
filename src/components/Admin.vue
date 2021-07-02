@@ -1,50 +1,70 @@
 <template>
   <div class="container">
     <h1 class="header-title">Administration</h1>
+    <div
+      style="display: flex; justify-content: space-between"
+      v-for="user in users"
+      :key="user.id"
+      :user="user"
+    >
+      <div class="verify-card">
+        <h3 class="card-title">Vérifications Pièces d'identité</h3>
+        <div style="display: inline-flex">
+          <h5>Nom :</h5>
+          <p style="margin: 20px">{{ user.last_name }}</p>
+          <h5>Prénom:</h5>
+          <p style="margin: 20px">{{ user.first_name }}</p>
+        </div>
+        <h5>Fichiers envoyés :</h5>
+        <ul class="list-file">
+          <li class="file-item">
+            {{ user.id_card }}
+            <img
+              src="../images/oeil.png"
+              alt=""
+              class="oeil"
+              @click="openImage(user.id_card, user)"
+            />
+          </li>
+          <li class="file-item">
+            {{ user.selfie }}
+            <img
+              src="../images/oeil.png"
+              alt=""
+              class="oeil"
+              @click="openImage(user.selfie, user)"
+            />
+          </li>
+          <li class="file-item">
+            {{ user.electoral_card }}
+            <img
+              src="../images/oeil.png"
+              alt=""
+              class="oeil"
+              @click="openImage(user.electoral_card, user)"
+            />
+          </li>
+        </ul>
 
-    <div class="verify-card" v-for="user in users" :key="user.id" :user="user">
-      <h3 class="card-title">Vérifications Pièces d'identité</h3>
-      <h5>{{ user.last_name }} {{ user.first_name }}</h5>
-      <h5>Fichiers envoyés :</h5>
-      <ul class="list-file">
-        <li class="file-item">
-          {{ user.id_card }}
-          <img
-            id="id_card"
-            :src="getImgUrl_id_card(user)"
-            alt=""
-            class="oeil"
-          />
-        </li>
-        <li class="file-item">
-          {{ user.selfie }}
-          <img id="selfie" :src="getImgUrl_selfie(user)" alt="" class="oeil" />
-        </li>
-        <li class="file-item">
-          {{ user.electoral_card }}
-          <img
-            id="electoral_card"
-            :src="getImg_electoral_card(user)"
-            alt=""
-            class="oeil"
-          />
-        </li>
-      </ul>
-
-      <div class="btn-container">
-        <button
-          class="btn-blue"
-          v-on:click="setIsValid(true, user.id, user.email)"
-        >
-          Valider le compte
-        </button>
-        <button
-          class="btn-red"
-          v-on:click="setIsValid(false, user.id, user.email)"
-        >
-          Refuser le compte
-        </button>
+        <div class="btn-container">
+          <button
+            class="btn-blue"
+            v-on:click="setIsValid(true, user.id, user.email)"
+          >
+            Valider le compte
+          </button>
+          <button
+            class="btn-red"
+            v-on:click="setIsValid(false, user.id, user.email)"
+          >
+            Refuser le compte
+          </button>
+        </div>
       </div>
+      <img
+        :id="`output${user.id}`"
+        style="width: 500px; object-fit: contain; margin-top: 50px"
+      />
     </div>
   </div>
 </template>
@@ -77,14 +97,9 @@ module.exports = {
           this.users.splice(index, 1);
         });
     },
-    getImgUrl_id_card(user) {
-      return "http://localhost:5000/" + user.id_card;
-    },
-    getImgUrl_selfie(user) {
-      return "http://localhost:5000/" + user.selfie;
-    },
-    getImg_electoral_card(user) {
-      return "http://localhost:5000/" + user.electoral_card;
+    openImage(type, user) {
+      const output = document.getElementById("output" + user.id);
+      output.src = "http://localhost:5000/" + type;
     },
   },
 };
