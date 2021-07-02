@@ -1,176 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
+			rel="stylesheet"
+		/>
 
-    <title>E-soloir</title>
+		<title>E-soloir</title>
 
-    <!-- Google Captcha -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		<!-- Google Captcha -->
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <!-- Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<!-- Vue -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!-- Chart JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="https://unpkg.com/vue-chartjs@3.4.0/dist/vue-chartjs.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <header>
-        <div class="header-logo">
-          <div class="logo-container">
-            <router-link to="/" class="nostyle">
-              <img
-                src="./images/marianne-sig.svg"
-                alt="marianne logo"
-                class="marianne"
-            /></router-link>
-            <router-link to="/" class="nostyle">
-              <img src="./images/logo.png" alt="logo" class="logo" />
-            </router-link>
-          </div>
-        </div>
-        <nav class="navbar">
-          <ul class="menu">
-            <li class="menu-item">
-              <router-link to="/" exact>Le vote en ligne</router-link>
-            </li>
-            <li class="menu-item">
-              <router-link to="/#comment-ca-marche"
-                >Comment ça marche?</router-link
-              >
-            </li>
-            <li class="menu-item">
-              <router-link to="/aide">Aide</router-link>
-            </li>
-            <li class="menu-item">
-              <router-link to="/resultat">Resultat</router-link>
-            </li>
-            <li class="menu-item" v-if="isConnected">
-              <router-link to="/voter">Voter</router-link>
-            </li>
-            <li class="menu-item" v-if="!isConnected">
-              <router-link to="/connexion">Se connecter</router-link>
-            </li>
-            <li class="menu-item" v-else>
-              <button @click="logout">Deconnexion</button>
-            </li>
-            <li class="menu-item" v-if="!isConnected">
-              <router-link to="/inscription">S'inscrire</router-link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <router-view
-          :user="user"
-          :isConnected="isConnected"
-          @connexion="connexion"
-        ></router-view>
-      </main>
+		<!-- Chart JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+		<script src="https://unpkg.com/vue-chartjs@3.4.0/dist/vue-chartjs.js"></script>
+		<!-- include the VeeValidate library -->
+		<script src="https://cdn.jsdelivr.net/npm/vee-validate@3.3.8/dist/vee-validate.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vee-validate@3.3.8/dist/rules.umd.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+				<div class="header-logo">
+					<div class="logo-container">
+						<router-link to="/" class="nostyle">
+							<img
+								src="./images/marianne-sig.svg"
+								alt="marianne logo"
+								class="marianne"
+						/></router-link>
+						<router-link to="/" class="nostyle">
+							<img src="./images/logo.png" alt="logo" class="logo" />
+						</router-link>
+					</div>
+				</div>
+				<nav class="navbar">
+					<ul class="menu">
+						<li class="menu-item">
+							<router-link to="/" exact>Le vote en ligne</router-link>
+						</li>
+						<li class="menu-item">
+							<router-link to="/#comment-ca-marche"
+								>Comment ça marche?</router-link
+							>
+						</li>
+						<li class="menu-item">
+							<router-link to="/aide">Aide</router-link>
+						</li>
+						<li class="menu-item">
+							<router-link to="/resultat">Resultat</router-link>
+						</li>
+						<li class="menu-item" v-if="isConnected">
+							<router-link to="/voter">Voter</router-link>
+						</li>
+						<li class="menu-item" v-if="!isConnected">
+							<router-link to="/connexion">Se connecter</router-link>
+						</li>
+						<li class="menu-item" v-else>
+							<button @click="logout">Deconnexion</button>
+						</li>
+						<li class="menu-item" v-if="!isConnected">
+							<router-link to="/inscription">S'inscrire</router-link>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				<router-view
+					:user="user"
+					:isConnected="isConnected"
+					@connexion="connexion"
+				></router-view>
+			</main>
 
-      <footer>
-        <div class="footer-container">
-          <div class="footer-logo-container">
-            <a href="/"
-              ><img
-                src="./images/marianne-sig.svg"
-                alt="Logo de la Marianne et devise nationale"
-                class="marianne-footer"
-            /></a>
+			<footer>
+				<div class="footer-container">
+					<div class="footer-logo-container">
+						<a href="/"
+							><img
+								src="./images/marianne-sig.svg"
+								alt="Logo de la Marianne et devise nationale"
+								class="marianne-footer"
+						/></a>
 
-            <a href="">
-              <img
-                src="./images/logo.png"
-                alt="e-soloir logo"
-                class="logo-footer"
-              />
-            </a>
-          </div>
+						<a href="">
+							<img
+								src="./images/logo.png"
+								alt="e-soloir logo"
+								class="logo-footer"
+							/>
+						</a>
+					</div>
 
-          <ul>
-            <li>
-              <a target="_blank" href="https://franceconnect.gouv.fr/cgu"
-                >Conditions Générales d’Utilisation</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://franceconnect.gouv.fr/mentions-legales"
-                >Mentions légales</a
-              >
-            </li>
-            <li>
-              <a target="_blank" href="https://franceconnect.gouv.fr/presse"
-                >On parle de nous</a
-              >
-            </li>
-            <li>
-              <a target="_blank" href="https://franceconnect.gouv.fr/faq"
-                >Consultez notre FAQ</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://franceconnect.gouv.fr/partenaires"
-                >Devenez partenaires</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://franceconnect.gouv.fr/faq#CONTACT"
-                >Contactez-nous</a
-              >
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://franceconnect.gouv.fr/accessibilite"
-                >Accessibilité</a
-              >
-            </li>
-            <li>
-              <a target="_blank" href="https://franceconnect.gouv.fr/plan-site"
-                >Plan du site</a
-              >
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <u><strong>Autres sites :</strong></u>
-            </li>
-            <li>
-              <a href="https://www.legifrance.gouv.fr/">legifrance.gouv.fr</a>
-            </li>
-            <li>
-              <a href="https://www.service-public.fr/">service-public.fr</a>
-            </li>
-            <li><a href="https://www.gouvernement.fr/">gouvernement.fr</a></li>
-            <li><a href="https://www.data.gouv.fr/fr/">data.gouv.fr</a></li>
-          </ul>
-        </div>
-      </footer>
-    </div>
+					<ul>
+						<li>
+							<a target="_blank" href="https://franceconnect.gouv.fr/cgu"
+								>Conditions Générales d’Utilisation</a
+							>
+						</li>
+						<li>
+							<a
+								target="_blank"
+								href="https://franceconnect.gouv.fr/mentions-legales"
+								>Mentions légales</a
+							>
+						</li>
+						<li>
+							<a target="_blank" href="https://franceconnect.gouv.fr/presse"
+								>On parle de nous</a
+							>
+						</li>
+						<li>
+							<a target="_blank" href="https://franceconnect.gouv.fr/faq"
+								>Consultez notre FAQ</a
+							>
+						</li>
+						<li>
+							<a
+								target="_blank"
+								href="https://franceconnect.gouv.fr/partenaires"
+								>Devenez partenaires</a
+							>
+						</li>
+						<li>
+							<a
+								target="_blank"
+								href="https://franceconnect.gouv.fr/faq#CONTACT"
+								>Contactez-nous</a
+							>
+						</li>
+						<li>
+							<a
+								target="_blank"
+								href="https://franceconnect.gouv.fr/accessibilite"
+								>Accessibilité</a
+							>
+						</li>
+						<li>
+							<a target="_blank" href="https://franceconnect.gouv.fr/plan-site"
+								>Plan du site</a
+							>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<u><strong>Autres sites :</strong></u>
+						</li>
+						<li>
+							<a href="https://www.legifrance.gouv.fr/">legifrance.gouv.fr</a>
+						</li>
+						<li>
+							<a href="https://www.service-public.fr/">service-public.fr</a>
+						</li>
+						<li><a href="https://www.gouvernement.fr/">gouvernement.fr</a></li>
+						<li><a href="https://www.data.gouv.fr/fr/">data.gouv.fr</a></li>
+					</ul>
+				</div>
+			</footer>
+		</div>
 
-    <script src="js/vue-application.js"></script>
-    <script src="js/chart.js"></script>
-    <script src="js/web3.min.js"></script>
-    <script src="js/truffle-contract.js"></script>
-    <script src="js/app.js"></script>
-  </body>
+		<script src="js/vue-application.js"></script>
+		<script src="js/chart.js"></script>
+		<script>
+			Vue.component("validation-observer", VeeValidate.ValidationObserver);
+			Vue.component("validation-provider", VeeValidate.ValidationProvider);
+			Object.keys(VeeValidateRules).forEach((rule) => {
+				VeeValidate.extend(rule, VeeValidateRules[rule]);
+			});
+		</script>
+		<script src="js/web3.min.js"></script>
+		<script src="js/truffle-contract.js"></script>
+		<script src="js/app.js"></script>
+	</body>
 </html>

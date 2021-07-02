@@ -13,69 +13,86 @@
         <h3 class="heading-3">
           Les champs marqués d'un <span>*</span> sont obligatoires
         </h3>
+      <validation-observer >
         <form @submit.prevent="createUser()" enctype="multipart/form-data">
           <div>
             <label for="last_name"><span>*</span> Nom </label>
-            <input
-              type="text"
-              name="last_name"
-              id="last_name"
-              v-model="last_name"
-            />
+            <validation-provider rules="required|alpha" v-slot="{ errors }">
+              <input
+                type="text"
+                name="Nom"
+                id="last_name"
+                v-model="last_name"
+              />
+              <div class="invalid-feedback d-inline-block" v-show="errors">{{ errors[0] }}</div>
+            </validation-provider>
           </div>
           <div>
             <label for="first_name"><span>*</span> Prénom </label>
-            <input
-              type="text"
-              name="first_name"
-              id="first_name"
-              v-model="first_name"
-            />
+            <validation-provider rules="required|alpha" v-slot="{ errors }">
+              <input
+                type="text"
+                name="Prenom"
+                id="first_name"
+                v-model="first_name"
+              />
+              <div class="invalid-feedback d-inline-block" v-show="errors">{{ errors[0] }}</div>
+            </validation-provider> 
           </div>
           <div>
             <label for="phone"><span>*</span> Numéro de téléphone </label>
-            <input type="text" name="phone" id="phone" v-model="phone" />
+            <validation-provider rules="required|digits:10" v-slot="{ errors }">
+              <input type="text" name="phone" id="phone" v-model="phone" />
+              <div class="invalid-feedback d-inline-block" v-show="errors">{{ errors[0] }}</div>
+            </validation-provider>
           </div>
 
           <div>
             <label for="email"
-              ><span>*</span> Adresse électronique (exmple:
-              nom@exemple.fr)</label
-            >
-            <input
-              type="email"
-              name="email"
-              id="email"
-              v-model="email"
-              autocomplete="email"
-              required
-            />
+              ><span>*</span> Adresse électronique (exemple:nom@exemple.fr)
+            </label>
+            <validation-provider rules="required|email" v-slot="{ errors }">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                v-model="email"
+                autocomplete="email"
+                required
+              />
+              <div class="invalid-feedback d-inline-block" v-show="errors">{{ errors[0] }}</div>
+            </validation-provider>
           </div>
           <div>
-            <label for="nom"
-              ><span>*</span> Mot de passe <br />(8 caractères,1 Majuscule, 1
+            <label for="password"><span>*</span> Mot de passe <br />(8 caractères,1 Majuscule, 1
               chiffre et 1 caractère spécial)
             </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              v-model="password"
-              autocomplete="new-password"
-              required
-            />
+            <validation-provider rules="required|min:8" vid="password" v-slot="{ errors }">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                v-model="password"
+                autocomplete="new-password"
+                required
+              />
+              <div class="invalid-feedback d-inline-block" v-show="errors">{{ errors[0] }}</div>
+            </validation-provider> 
           </div>
           <div>
             <label for="confirmPassword"
               ><span>*</span> Confirmer votre Mot de passe
             </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              autocomplete="new-password"
-              required
-            />
+            <validation-provider rules="required|confirmed:password" v-slot="{ errors }">
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                autocomplete="new-password"
+                required
+              />
+              <div class="invalid-feedback d-inline-block" v-show="errors">{{ errors[0] }}</div>
+            </validation-provider> 
           </div>
 
           <div class="upload-container">
@@ -92,6 +109,7 @@
             <label for="file" class="label-pj"
               ><span>*</span> Pièces jointes(.jpeg,.png,.pdf)</label
             >
+         
             <input
               type="file"
               name="file"
@@ -140,10 +158,14 @@
             <button type="submit">S'inscrire</button>
           </div>
         </form>
+      </validation-observer>
       </div>
     </div>
   </div>
 </template>
+
+  
+
 
 <script>
 module.exports = {
@@ -158,6 +180,11 @@ module.exports = {
       email: "",
       password: "",
     };
+  },
+  watch:{
+    last_name(value){
+      this.last_name = value;
+    }
   },
   methods: {
     previewFiles(event) {
@@ -247,8 +274,11 @@ module.exports = {
         })
         .catch((err) => ("Error occured", err));
 
+       
       // this.$router.push("/")
     },
+
+      
   },
 };
 </script>
@@ -297,8 +327,8 @@ span {
 .form-container {
   display: flex;
   flex-flow: column wrap;
-  width: 500px;
-  margin-left: 250px;
+  /* width: 500px; */
+
   align-items: center;
 }
 
@@ -375,12 +405,14 @@ input[type="file"]::-webkit-file-upload-button {
 
 .layout {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 .upload-container {
   margin-right: 250px;
   width: 500px;
+  color: black;
 }
 
 .list-file {
