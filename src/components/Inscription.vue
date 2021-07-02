@@ -230,7 +230,7 @@ module.exports = {
 
           // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
           div.style.display = "block";
-          location.href = "/inscription#alert-success";
+          location.href = "#alert-success";
 
           close[0].onclick = function () {
             // Get the parent of <span class="closebtn"> (<div class="alert">)
@@ -464,6 +464,7 @@ button:active {
   transition: opacity 0.6s;
   margin-bottom: 15px;
   display: none;
+  margin: 20px 0;
 }
 
 .alert.success {
