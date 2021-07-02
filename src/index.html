@@ -51,9 +51,7 @@
 							<router-link to="/" exact>Le vote en ligne</router-link>
 						</li>
 						<li class="menu-item">
-							<router-link to="/#comment-ca-marche"
-								>Comment ça marche?</router-link
-							>
+							<a href="/#comment-ca-marche">Comment ça marche?</a>
 						</li>
 						<li class="menu-item">
 							<router-link to="/aide">Aide</router-link>
@@ -68,7 +66,9 @@
 							<router-link to="/connexion">Se connecter</router-link>
 						</li>
 						<li class="menu-item" v-else>
-							<button @click="logout">Deconnexion</button>
+							<button class="deconnexion-btn" @click="logout">
+								Deconnexion
+							</button>
 						</li>
 						<li class="menu-item" v-if="!isConnected">
 							<router-link to="/inscription">S'inscrire</router-link>
