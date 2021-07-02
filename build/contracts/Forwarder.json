@@ -30622,14 +30622,53 @@
   },
   "networks": {
     "5777": {
-      "events": {},
+      "events": {
+        "0x4bc68689cbe89a4a6333a3ab0a70093874da3e5bfb71e93102027f3f073687d8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "domainSeparator",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "domainValue",
+              "type": "bytes"
+            }
+          ],
+          "name": "DomainRegistered",
+          "type": "event"
+        },
+        "0x64d6bce64323458c44643c51fe45113efc882082f7b7fd5f09f0d69d2eedb202": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "typeHash",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "typeStr",
+              "type": "string"
+            }
+          ],
+          "name": "RequestTypeRegistered",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xe891b0d4996A14B7Dd193FE15177044978736c81",
-      "transactionHash": "0xdc8241ea1a45315e80d7d87b8cafa978d2c66ad74512be7276c7d4235ec74e0c"
+      "address": "0xD9cE11e6c3707a66d91f4315501F0Fe4FF4B706A",
+      "transactionHash": "0x5e6a6a01a710fd7445c21c6393da57cf3b0eafa5a80e346bc9ee9970d1509701"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-06-30T14:12:00.015Z",
+  "updatedAt": "2021-07-01T12:37:00.550Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
