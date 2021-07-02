@@ -46,16 +46,43 @@ var app = new Vue({
     }
   },
   methods: {
-    async connexion(user) {
-      const res = await axios.post("http://localhost:5000/login", user);
-      user.data = res.data;
+    connexion(user) {
+      const formData = new FormData();
+      formData.append("email", user.email);
+      formData.append("password", user.password);
 
-      if (res.data !== undefined) {
-        this.user = res.data;
-        this.isConnected = true;
-        if (this.user.isadmin) this.$router.push("/admin");
-        else if (this.user.isvalidated == "true") this.$router.push("/voter");
-      } else console.log("user not validated yet");
+      const requestOptions = {
+        method: "POST",
+        body: formData,
+      };
+      fetch("http://localhost:5000/login", requestOptions)
+        .then(async (response) => {
+          const data = await response.json();
+
+          // check for error response
+          if (!response.ok) {
+            // get error message from body or default to response status
+            const error = (data && data.message) || response.status;
+            alert(error);
+            return Promise.reject(error);
+          }
+
+          console.log(data);
+          if (data.isvalidated) {
+            this.user = data;
+            this.isConnected = true;
+
+            if (this.user.isadmin) this.$router.push("/admin");
+            else this.$router.push("/voter");
+          } else
+            alert(
+              "Votre compte utilisateur n'a pas encore été validé par l'administrateur. Veuillez attendre le mail de validation."
+            );
+        })
+        .catch((error) => {
+          this.errorMessage = error;
+          console.error("There was an error!", error);
+        });
     },
 
     async logout() {
