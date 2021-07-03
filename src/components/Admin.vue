@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <h1 class="header-title">Administration</h1>
+    <div v-if="users.length == 0"><h1>pas d'utilisateurs</h1></div>
     <div
-      style="display: flex; justify-content: space-between"
+      style="display: flex; justify-content: space-around"
       v-for="user in users"
       :key="user.id"
       :user="user"
@@ -63,7 +64,12 @@
       </div>
       <img
         :id="`output${user.id}`"
-        style="width: 500px; object-fit: contain; margin-top: 50px"
+        style="
+          width: auto;
+          object-fit: contain;
+          margin-top: 50px;
+          height: 500px;
+        "
       />
     </div>
   </div>
