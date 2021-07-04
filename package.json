@@ -15,5 +15,7 @@
   "devDependencies": {
     "lite-server": "^2.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0"
+  }
 }
