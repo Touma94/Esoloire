@@ -53,7 +53,33 @@
 
 <script>
 module.exports = {
-    name:'Connexion'
+    name:'Connexion',
+	data(){
+		return{
+			email: "",
+			password:"",
+		}
+	},
+	methods:{
+		async connexion(){
+
+			this.$emit("connexion",{
+				email:this.email,
+				password: this.password
+			})
+// const res = await axios.post("http://localhost:5000/login",{
+	// 			email: this.email,
+	// 			password: this.password
+	// });
+	// const user = res.data;
+	// if(user.isadmin) this.$router.push("/admin");
+	// else if(user.isvalidated == 'true') this.$router.push("/voter");
+	// else console.log("user not validated yet");
+		
+		
+		}
+	}
+
 }
 </script>
 <style scoped>

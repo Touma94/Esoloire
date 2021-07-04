@@ -25,6 +25,9 @@
 		<!-- Chart JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 		<script src="https://unpkg.com/vue-chartjs@3.4.0/dist/vue-chartjs.js"></script>
+		<!-- include the VeeValidate library -->
+		<script src="https://cdn.jsdelivr.net/npm/vee-validate@3.3.8/dist/vee-validate.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vee-validate@3.3.8/dist/rules.umd.js"></script>
 	</head>
 	<body>
 		<div id="app">
@@ -48,9 +51,7 @@
 							<router-link to="/" exact>Le vote en ligne</router-link>
 						</li>
 						<li class="menu-item">
-							<router-link to="/#comment-ca-marche"
-								>Comment ça marche?</router-link
-							>
+							<a href="/#comment-ca-marche">Comment ça marche?</a>
 						</li>
 						<li class="menu-item">
 							<router-link to="/aide">Aide</router-link>
@@ -58,20 +59,29 @@
 						<li class="menu-item">
 							<router-link to="/resultat">Resultat</router-link>
 						</li>
-						<li class="menu-item">
+						<li class="menu-item" v-if="isConnected">
 							<router-link to="/voter">Voter</router-link>
 						</li>
-						<li class="menu-item">
+						<li class="menu-item" v-if="!isConnected">
 							<router-link to="/connexion">Se connecter</router-link>
 						</li>
-						<li class="menu-item">
+						<li class="menu-item" v-else>
+							<button class="deconnexion-btn" @click="logout">
+								Deconnexion
+							</button>
+						</li>
+						<li class="menu-item" v-if="!isConnected">
 							<router-link to="/inscription">S'inscrire</router-link>
 						</li>
 					</ul>
 				</nav>
 			</header>
 			<main>
-				<router-view></router-view>
+				<router-view
+					:user="user"
+					:isConnected="isConnected"
+					@connexion="connexion"
+				></router-view>
 			</main>
 
 			<footer>
@@ -162,6 +172,13 @@
 
 		<script src="js/vue-application.js"></script>
 		<script src="js/chart.js"></script>
+		<script>
+			Vue.component("validation-observer", VeeValidate.ValidationObserver);
+			Vue.component("validation-provider", VeeValidate.ValidationProvider);
+			Object.keys(VeeValidateRules).forEach((rule) => {
+				VeeValidate.extend(rule, VeeValidateRules[rule]);
+			});
+		</script>
 		<script src="js/web3.min.js"></script>
 		<script src="js/truffle-contract.js"></script>
 		<script src="js/app.js"></script>
