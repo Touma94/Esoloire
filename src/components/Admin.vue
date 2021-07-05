@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <h1 class="header-title">Administration</h1>
-    <div v-if="users.length == 0"><h1>pas d'utilisateurs</h1></div>
+    <div class="alert info" style="margin: 50px 0" v-if="users.length == 0">
+      <span class="closebtn">×</span>
+      <strong>Information!</strong> Aucun utilisateurs à vérifier.
+    </div>
     <div
       style="display: flex; justify-content: space-around"
       v-for="user in users"
@@ -228,5 +231,19 @@ h5 {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.alert {
+  -webkit-text-size-adjust: 100%;
+  font-family: Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  box-sizing: inherit;
+  padding: 20px;
+  color: white;
+  opacity: 0.83;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+  background-color: #2196f3;
 }
 </style>
