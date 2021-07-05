@@ -88,6 +88,7 @@ var app = new Vue({
     async logout() {
       await axios.delete("http://localhost:5000/logout");
       this.isConnected = false;
+      this.$router.push("/");
     },
   },
 }).$mount("#app");
