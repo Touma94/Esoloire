@@ -1,5 +1,5 @@
 {
-  "name": "pet-shop",
+  "name": "e-soloir",
   "version": "1.0.0",
   "description": "",
   "main": "truffle.js",
@@ -7,15 +7,28 @@
     "test": "test"
   },
   "scripts": {
+    "start": "nodemon main.js",
     "dev": "lite-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "truffle test",
+    "migrate": "truffle migrate --network rinkerby --reset",
+    "console": "truffle console --network rinkerby"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.3.0"
+    "@opengsn/cli": "^2.2.2",
+    "@opengsn/dev": "^2.2.2",
+    "dotenv": "^10.0.0",
+    "lite-server": "^2.3.0",
+    "webpack": "^5.42.0"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.1.0"
+    "@opengsn/contracts": "^2.2.2",
+    "@opengsn/provider": "^2.2.2",
+    "@openzeppelin/contracts": "^4.1.0",
+    "@openzeppelin/gsn-helpers": "^0.2.4",
+    "ethers": "^5.4.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.8"
   }
 }

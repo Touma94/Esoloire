@@ -1,6 +1,9 @@
-# frontend
+# E-soloir - frontend
 
-### Run front :
+### Project setup :
+> npm install
+
+### Run front - development:
 > npm run dev
 
 ### Run truffle test :
