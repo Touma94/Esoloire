@@ -96,5 +96,6 @@ App = {
     // console.log(`Transaction hash: ${receipt.transactionHash}`);
 
   },
-
 };
+
+export default App;
