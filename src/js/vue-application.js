@@ -15,8 +15,6 @@ const routes = [
   { path: "/admin", component: Admin },
 ];
 
-console.log(routes);
-
 const router = new VueRouter({
   routes: routes,
   linkActiveClass: "active",
@@ -34,10 +32,12 @@ var app = new Vue({
   },
   async mounted() {
     try {
-      const res = await axios.get("http://localhost:5000/me");
-      this.user = res.data;
+      const res3 = await axios.get("http://localhost:5000/me");
+      console.log(res3.data);
+      this.user = res3.data;
       this.isConnected = true;
     } catch (err) {
+      // if (err.response && err.response.statusCode === 401) {
       if (err.response?.status === 401) {
         this.isConnected = false;
       } else {
@@ -46,43 +46,23 @@ var app = new Vue({
     }
   },
   methods: {
-    connexion(user) {
+    async connexion(user) {
       const formData = new FormData();
       formData.append("email", user.email);
       formData.append("password", user.password);
 
-      const requestOptions = {
-        method: "POST",
-        body: formData,
-      };
-      fetch("http://localhost:5000/login", requestOptions)
-        .then(async (response) => {
-          const data = await response.json();
+      const res = await axios.post("http://localhost:5000/login", formData);
 
-          // check for error response
-          if (!response.ok) {
-            // get error message from body or default to response status
-            const error = (data && data.message) || response.status;
-            alert(error);
-            return Promise.reject(error);
-          }
+      if (res.data.isvalidated) {
+        this.user = res.data;
+        this.isConnected = true;
 
-          console.log(data);
-          if (data.isvalidated) {
-            this.user = data;
-            this.isConnected = true;
-
-            if (this.user.isadmin) this.$router.push("/admin");
-            else this.$router.push("/voter");
-          } else
-            alert(
-              "Votre compte utilisateur n'a pas encore été validé par l'administrateur. Veuillez attendre le mail de validation."
-            );
-        })
-        .catch((error) => {
-          this.errorMessage = error;
-          console.error("There was an error!", error);
-        });
+        if (this.user.isadmin) this.$router.push("/admin");
+        else this.$router.push("/voter");
+      } else
+        alert(
+          "Votre compte utilisateur n'a pas encore été validé par l'administrateur. Veuillez attendre le mail de validation."
+        );
     },
 
     async logout() {
