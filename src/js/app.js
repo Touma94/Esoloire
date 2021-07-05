@@ -64,7 +64,6 @@ App = {
       let cd = await instance.candidats(i);
       candidats[i - 1] = cd[1];
     }
-    App.voter(2);
     return candidats;
   },
 
